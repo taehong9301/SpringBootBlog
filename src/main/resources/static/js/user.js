@@ -1,4 +1,4 @@
-let index = {
+const index = {
     init: function () {
         const btnSave = document.querySelector("#btn-save")
         if (null !== btnSave) {
@@ -6,12 +6,12 @@ let index = {
                 this.save();
             });
         }
-        const btnLogin = document.querySelector("#btn-login")
-        if (null !== btnLogin) {
-            btnLogin.addEventListener("click", () => {
-                this.login();
-            });
-        }
+        // const btnLogin = document.querySelector("#btn-login")
+        // if (null !== btnLogin) {
+        //     btnLogin.addEventListener("click", () => {
+        //         this.login();
+        //     });
+        // }
     },
     save: function () {
         const username = $("#username").val();
@@ -22,7 +22,7 @@ let index = {
 
         $.ajax({
             type: "POST",
-            url: "/api/user",
+            url: "/auth/joinProc",
             data: JSON.stringify(data), // body 데이터
             contentType: "application/json; charset=utf-8",
             dataType: "json" // 응답의 데이터
@@ -34,24 +34,25 @@ let index = {
             console.log(error);
         });
     },
-    login: function () {
-        const username = $("#username").val();
-        const password = $("#password").val();
-        const data = {username, password};
-
-        $.ajax({
-            type: "POST",
-            url: "/api/user/login",
-            data: JSON.stringify(data), // body 데이터
-            contentType: "application/json; charset=utf-8",
-            dataType: "json" // 응답의 데이터
-        }).done(function (response) {
-            location.href = "/";
-        }).fail(function (error) {
-            console.log("실패 " + error);
-            console.log(error);
-        });
-    }
+    // 고전적인 로그인 방식
+    // login: function () {
+    //     const username = $("#username").val();
+    //     const password = $("#password").val();
+    //     const data = {username, password};
+    //
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/auth/login",
+    //         data: JSON.stringify(data), // body 데이터
+    //         contentType: "application/json; charset=utf-8",
+    //         dataType: "json" // 응답의 데이터
+    //     }).done(function (response) {
+    //         location.href = "/";
+    //     }).fail(function (error) {
+    //         console.log("실패 " + error);
+    //         console.log(error);
+    //     });
+    // }
 }
 
 index.init();
