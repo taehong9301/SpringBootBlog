@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("resources/**");
+    web.ignoring().antMatchers("/resources/**");
   }
 
   @Override
@@ -39,14 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         // 로그인 설정
         .formLogin()
-        .loginPage("/auth/loginForm")
-        .permitAll()
-        .loginProcessingUrl("/auth/login")
-        .permitAll()
+        .loginPage("/auth/loginForm") // 로그인 폼 경로
+        .loginProcessingUrl("/auth/loginProc") // 실제 로그인이 이루어지는 경로
+        .defaultSuccessUrl("/") // 로그인 후 기본 리다이렉트 주소 ( 이전 주소 값이 있으면, 이전 주소로 이동 )
         .and()
         // 로그아웃 설정
         .logout()
-        .logoutUrl("/logout")
-        .permitAll();
+        .logoutUrl("/logout"); // 로그아웃이 이루어지는 경로
   }
 }

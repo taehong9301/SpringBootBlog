@@ -3,8 +3,7 @@
 
 <sec:authorize access="!isAuthenticated()">
     <h3>로그인 하기</h3>
-    <form action="/auth/login" method="post">
-
+    <form action="/auth/loginProc" method="post">
         username: <input type="text" id="username" name="username"/> <br/>
         password: <input type="password" id="password" name="password"/> <br/>
         <button type="submit">로그인</button>
