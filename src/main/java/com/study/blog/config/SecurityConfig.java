@@ -1,7 +1,10 @@
 package com.study.blog.config;
 
+import com.study.blog.config.auth.PrincipalDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -15,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 특정 주소로 접그하면, 권한 및 인증을 미리 체크
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+  @Autowired private PrincipalDetailsService principalDetailsService;
+
   @Bean // IoC 등록
   public BCryptPasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
@@ -23,6 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   public void configure(WebSecurity web) throws Exception {
     web.ignoring().antMatchers("/resources/**");
+  }
+
+  // 시큐리티가 대신 로그인을 할때,
+  // password 가 어떤 해시로 암호화됐는지 알아야 DB 값과 비교 가능하므로,
+  // 암호화 알고리즘을 알려줌
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(principalDetailsService).passwordEncoder(passwordEncoder());
   }
 
   @Override
