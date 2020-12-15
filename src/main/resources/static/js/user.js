@@ -27,8 +27,8 @@ let index = {
             contentType: "application/json; charset=utf-8",
             dataType: "json" // 응답의 데이터
         }).done(function (response) {
-            console.log(response);
-            // location.href = "/";
+            alert("회원가입 완료");
+            location.href = "/";
         }).fail(function (error) {
             console.log("실패 " + error);
             console.log(error);
@@ -46,8 +46,7 @@ let index = {
             contentType: "application/json; charset=utf-8",
             dataType: "json" // 응답의 데이터
         }).done(function (response) {
-            console.log(response);
-            // location.href = "/";
+            location.href = "/";
         }).fail(function (error) {
             console.log("실패 " + error);
             console.log(error);

@@ -2,11 +2,6 @@
 
 <%@ include file="layout/header.jsp" %>
 
-<ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/user/loginForm">로그인</a></li>
-    <li><a href="/user/joinForm">회원가입</a></li>
-</ul>
-
+<h1>HELLO WORLD</h1>
 
 <%@ include file="layout/footer.jsp" %>

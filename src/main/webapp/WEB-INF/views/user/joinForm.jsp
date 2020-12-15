@@ -11,11 +11,6 @@
 </form>
 <button id="btn-save">회원가입</button>
 
-<ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/user/loginForm">로그인</a></li>
-</ul>
-
 <script type="text/javascript" src="/js/user.js"></script>
 
 <%@ include file="../layout/footer.jsp" %>

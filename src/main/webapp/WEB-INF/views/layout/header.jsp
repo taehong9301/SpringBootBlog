@@ -13,13 +13,13 @@
     <li><a href="/">Home</a></li>
     <c:choose>
         <c:when test="${empty sessionScope.principal}">
-            <li><a href="/user/loginForm">로그인</a></li>
-            <li><a href="/user/joinForm">회원가입</a></li>
+            <li><a href="/loginForm">로그인</a></li>
+            <li><a href="/joinForm">회원가입</a></li>
         </c:when>
         <c:otherwise>
-            <li><a href="/">글쓰기</a></li>
-            <li><a href="/">회원정보</a></li>
-            <li><a href="/user/logout">로그아웃</a></li>
+            <li><a href="/board/form">글쓰기</a></li>
+            <li><a href="/user/form">회원정보</a></li>
+            <li><a href="/logout">로그아웃</a></li>
         </c:otherwise>
     </c:choose>
 </ul>
