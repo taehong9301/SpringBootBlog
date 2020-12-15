@@ -18,9 +18,9 @@ public class UserApiController {
   @PostMapping("user")
   public @ResponseBody ResponseDto<User> user(@RequestBody User user) {
     try {
-      return new ResponseDto<>(HttpStatus.OK, userService.join(user));
+      return new ResponseDto<>(HttpStatus.OK.value(), userService.join(user));
     } catch (Exception e) {
-      return new ResponseDto<>(HttpStatus.INTERNAL_SERVER_ERROR, null);
+      return new ResponseDto<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), null);
     }
   }
 }

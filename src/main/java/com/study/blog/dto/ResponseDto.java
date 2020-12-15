@@ -12,6 +12,6 @@ import org.springframework.http.HttpStatus;
 @Accessors(chain = true)
 public class ResponseDto<T> {
 
-  HttpStatus status;
+  int status;
   T data;
 }
