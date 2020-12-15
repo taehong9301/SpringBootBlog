@@ -4,6 +4,7 @@ import com.study.blog.model.RoleType;
 import com.study.blog.model.User;
 import com.study.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +15,11 @@ public class UserService {
 
   @Autowired private UserRepository userRepository;
 
+  @Autowired private BCryptPasswordEncoder passwordEncoder;
+
   @Transactional
   public User join(User user) {
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     user.setRole(RoleType.USER);
     return userRepository.save(user);
   }
