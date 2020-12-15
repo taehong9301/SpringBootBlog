@@ -3,4 +3,13 @@ package com.study.blog.repository;
 import com.study.blog.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {}
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+  // select * from user where username = ? and password ?
+  Optional<User> findByUsernameAndPassword(String username, String password);
+
+  //  @Query(value = "select * from user where username = ? and password ?", nativeQuery = true)
+  //  Optional<User> login(String username, String password);
+}
