@@ -1,7 +1,6 @@
 package com.study.blog.model;
 
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -28,7 +27,7 @@ public class Board {
   @Lob // 대용량 데이터를 쓸때 사용
   private String content;
 
-  @ColumnDefault("0")
+  // @ColumnDefault("0")
   private long count; // 조회
 
   // Board N : 1 User -> 한명의 유저는 여러개의 게시글을 사용할 수 있으므로..

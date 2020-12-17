@@ -35,7 +35,7 @@
         <li><a href="/auth/joinForm">회원가입</a></li>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
-        <li><a href="/board/form">글쓰기</a></li>
+        <li><a href="/board/saveForm">글쓰기</a></li>
         <li><a href="/user/form">회원정보</a></li>
         <li><a href="/logout">로그아웃</a></li>
     </sec:authorize>
