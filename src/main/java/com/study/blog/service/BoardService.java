@@ -31,4 +31,10 @@ public class BoardService {
   public Page<Board> getBoardList(Pageable pageable) {
     return boardRepository.findAll(pageable);
   }
+
+  public Board getBoard(long id) {
+    return boardRepository
+        .findById(id)
+        .orElseThrow(() -> new IllegalArgumentException("해당 글은 존재하지 않습니다."));
+  }
 }
