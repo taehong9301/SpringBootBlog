@@ -4,6 +4,7 @@ import com.study.blog.model.RoleType;
 import com.study.blog.model.User;
 import com.study.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,5 +30,18 @@ public class UserService {
     Optional<User> optionalUser =
         userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     return optionalUser.orElseThrow(() -> new RuntimeException("Not found user"));
+  }
+
+  @Transactional
+  public void updateUser(User user) {
+    Optional<User> optionalUser = userRepository.findById(user.getId());
+    User findUser = optionalUser.orElseThrow(() -> new UsernameNotFoundException("해당 사용자는 없습니다."));
+
+    if (null != user.getPassword() && !"".equals(user.getPassword())) {
+      findUser.setPassword(passwordEncoder.encode(user.getPassword()));
+    }
+    if (null != user.getEmail() && !"".equals(user.getEmail())) {
+      findUser.setEmail(user.getEmail());
+    }
   }
 }

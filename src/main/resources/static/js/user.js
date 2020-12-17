@@ -6,6 +6,12 @@ const index = {
                 this.save();
             });
         }
+        const btnUpdate = document.querySelector("#btn-update")
+        if (null !== btnUpdate) {
+            btnUpdate.addEventListener("click", () => {
+                this.update();
+            });
+        }
         // const btnLogin = document.querySelector("#btn-login")
         // if (null !== btnLogin) {
         //     btnLogin.addEventListener("click", () => {
@@ -28,6 +34,27 @@ const index = {
             dataType: "json" // 응답의 데이터
         }).done(function (response) {
             alert("회원가입 완료");
+            location.href = "/";
+        }).fail(function (error) {
+            console.log("실패 " + error);
+            console.log(error);
+        });
+    },
+    update: function () {
+        const id = $("#user-id").val();
+        const password = $("#password").val();
+        const email = $("#email").val();
+
+        const data = {id, password, email};
+
+        $.ajax({
+            type: "PUT",
+            url: "/user",
+            data: JSON.stringify(data), // body 데이터
+            contentType: "application/json; charset=utf-8",
+            dataType: "json" // 응답의 데이터
+        }).done(function (response) {
+            alert("회원 수정 완료" + response);
             location.href = "/";
         }).fail(function (error) {
             console.log("실패 " + error);
