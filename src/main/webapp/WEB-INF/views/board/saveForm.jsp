@@ -5,6 +5,7 @@
 <div>
     <h1>글쓰기</h1>
 
+    <%--    https://summernote.org/ SummerNote 쓰면 더 예쁨--%>
     <form>
         <label for="title">TITLE</label><input type="text" id="title"/><br>
         <label for="content">CONTENT</label><textarea id="content" rows="3" cols="50"></textarea><br>
