@@ -24,17 +24,36 @@ public class BoardService {
     return savedBoard;
   }
 
+  @Transactional(readOnly = true)
   public List<Board> getBoardList() {
     return boardRepository.findAll();
   }
 
+  @Transactional(readOnly = true)
   public Page<Board> getBoardList(Pageable pageable) {
     return boardRepository.findAll(pageable);
   }
 
+  @Transactional(readOnly = true)
   public Board getBoard(long id) {
     return boardRepository
         .findById(id)
         .orElseThrow(() -> new IllegalArgumentException("해당 글은 존재하지 않습니다."));
+  }
+
+  public void delete(long id) {
+    boardRepository.deleteById(id);
+  }
+
+  @Transactional
+  public void update(long id, Board board) {
+    Board findBoard = this.getBoard(id); // 영속화 완료 (영속화 컨텍스트에 보관)
+
+    // 영속화된 객체를 수정
+    findBoard.setTitle(board.getTitle());
+    findBoard.setContent(board.getContent());
+
+    // Transactional 에 의해 마지막에 commit 되면서,
+    // 영속화 컨텍스트에 위치한 객체가 업데이트 됨 -> 더티 체킹에 의해 flush 됨
   }
 }
