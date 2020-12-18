@@ -1,11 +1,15 @@
 package com.study.blog.controller.api;
 
+import com.study.blog.config.auth.PrincipalDetail;
 import com.study.blog.dto.ResponseDto;
 import com.study.blog.model.User;
 import com.study.blog.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -39,9 +43,15 @@ public class UserApiController {
   //  }
 
   @PutMapping("user")
-  public @ResponseBody ResponseDto<Integer> user(@RequestBody User user) {
+  public @ResponseBody ResponseDto<Integer> user(
+      @RequestBody User user, @AuthenticationPrincipal PrincipalDetail principalDetail) {
     try {
       userService.updateUser(user);
+      // DB값은 변경되었으나, 세션값은 변경되지 않음.
+      // 직접 세션값을 변경해줘야 함
+      Authentication authentication =
+          new UsernamePasswordAuthenticationToken(principalDetail, null);
+
       return new ResponseDto<>(HttpStatus.OK.value(), 1);
     } catch (Exception e) {
       return new ResponseDto<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), 1);
