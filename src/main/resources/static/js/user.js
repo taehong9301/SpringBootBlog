@@ -42,10 +42,11 @@ const index = {
     },
     update: function () {
         const id = $("#user-id").val();
+        const username = $("#username").text();
         const password = $("#password").val();
         const email = $("#email").val();
 
-        const data = {id, password, email};
+        const data = {id, username, password, email};
 
         $.ajax({
             type: "PUT",

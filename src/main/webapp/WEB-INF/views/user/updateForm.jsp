@@ -5,7 +5,7 @@
 <h3>회원가입하기</h3>
 <input type="hidden" id="user-id" value="${principal.user.id}"/>
 <form action="/user/join" method="POST">
-    username: ${principal.user.username} <br/>
+    username: <span id="username">${principal.user.username}</span> <br/>
     password: <input type="password" id="password"/> <br/>
     email: <input type="email" id="email" value="${principal.user.email}"/> <br/>
 </form>

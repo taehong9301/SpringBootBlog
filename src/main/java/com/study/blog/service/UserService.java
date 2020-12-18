@@ -33,7 +33,7 @@ public class UserService {
   }
 
   @Transactional
-  public void updateUser(User user) {
+  public User updateUser(User user) {
     Optional<User> optionalUser = userRepository.findById(user.getId());
     User findUser = optionalUser.orElseThrow(() -> new UsernameNotFoundException("해당 사용자는 없습니다."));
 
@@ -43,5 +43,7 @@ public class UserService {
     if (null != user.getEmail() && !"".equals(user.getEmail())) {
       findUser.setEmail(user.getEmail());
     }
+
+    return userRepository.save(findUser);
   }
 }
